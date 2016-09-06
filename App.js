@@ -26,14 +26,24 @@ class CommentBox extends React.Component {
     }
   }
 
+  constructor(){
+    super();
+
+    this.state = {
+      showComments: false
+    };
+  }
+
   render(){
     const comments = this._getComments();
+    let commentNodes;
+    if (this.state.showComments) { //add this code if the state is true
+      commentNodes = <div className="comment-list">{comments}</div>
+    }
     return (
       <div className="comment-box">
         <h3 className="comment-count">{this._getCommentsTitle(comments.length)}</h3>
-        <div className="comment-list">
-          {comments}
-        </div>
+        {commentNodes}
       </div>
     )
   }
