@@ -80,6 +80,25 @@ class Comment extends React.Component {
   }
 }
 
+class CommentForm extends React.Component {
+  render(){
+    return (
+      <form className="comment-form">
+        <label>Join the Discussion</label>
+        <div classNAME="comment-form-fields">
+          <input placeholder="Name: "/>
+          <textarea placeholder="Comment: "></textarea>
+        </div>
+        <div className="comment-form-actions">
+          <button type="submit">
+            Post comment
+          </button>
+        </div>
+      </form>
+    )
+  }
+}
+
 export default CommentBox
 
 ReactDOM.render(
