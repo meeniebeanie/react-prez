@@ -34,6 +34,12 @@ class CommentBox extends React.Component {
     };
   }
 
+  _handleClick(){
+    this.setState({
+      showComments: !this.state.showComments
+    });
+  }
+
   render(){
     const comments = this._getComments();
     let commentNodes;
@@ -43,6 +49,7 @@ class CommentBox extends React.Component {
     return (
       <div className="comment-box">
         <h3 className="comment-count">{this._getCommentsTitle(comments.length)}</h3>
+        <button onClick={this._handleClick.bind(this)}>Show Comments</button>
         {commentNodes}
       </div>
     )
