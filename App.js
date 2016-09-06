@@ -83,7 +83,7 @@ class Comment extends React.Component {
 class CommentForm extends React.Component {
   render(){
     return (
-      <form className="comment-form">
+      <form className="comment-form" onSubmit={this._handleSubmit.bind(this)}>
         <label>Join the Discussion</label>
         <div classNAME="comment-form-fields">
           <input placeholder="Name: "/>
@@ -97,7 +97,12 @@ class CommentForm extends React.Component {
       </form>
     )
   }
-}
+
+  _handleSubmit(event) {
+    event.preventDefault();
+  }
+
+}//end of CommentForm component
 
 export default CommentBox
 
