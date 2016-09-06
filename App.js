@@ -6,17 +6,17 @@ class CommentBox extends React.Component {
     super();
 
     this.state = {
-      showComments: false
+      showComments: false,
+      comments: [
+        { id:1, author:'Author 1', body: 'Great Body 1'},
+        { id:2, author:'Author 2', body: 'Great Body 2'}
+      ]
     };
   }
 
   _getComments(){
-    const commentList = [
-      { id:1, author:'Author 1', body: 'Great Body 1'},
-      { id:2, author:'Author 2', body: 'Great Body 2'}
-    ];
 
-    return commentList.map((comment) => {
+    return this.state.comments.map((comment) => {
       return (
         <Comment author={comment.author} body={comment.body} key={comment.id}/>
       );
