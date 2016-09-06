@@ -2,6 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class CommentBox extends React.Component {
+  constructor(){
+    super();
+
+    this.state = {
+      showComments: false
+    };
+  }
 
   _getComments(){
     const commentList = [
@@ -26,35 +33,34 @@ class CommentBox extends React.Component {
     }
   }
 
-  constructor(){
-    super();
-
-    this.state = {
-      showComments: false
-    };
-  }
-
   _handleClick(){
     this.setState({
       showComments: !this.state.showComments
     });
   }
 
+  _addComment(author, body){
+    const comment = {
+      id: this.state.comments.length + 1,
+      author,
+      body
+    };
+    this.setState({ comments: this.state.comments.concat([comment]) });
+  }
+
   render(){
     const comments = this._getComments();
-
     let buttonText = 'Show Comments';
-
-    if(this.state.showComments) {
-      buttonText = 'Hide Comments';
-    }
-
     let commentNodes;
-    if (this.state.showComments) { //add this code if the state is true
-      commentNodes = <div className="comment-list">{comments}</div>
+
+    if(this.state.showComments) { //add this code if the state is true
+      buttonText = 'Hide Comments';
+      commentNodes = <div className="comment-list">{comments}</div>;
     }
+
     return (
       <div className="comment-box">
+        <CommentForm addComment={this._addComment.bind(this)}/>
         <h3 className="comment-count">{this._getCommentsTitle(comments.length)}</h3>
         <button onClick={this._handleClick.bind(this)}>{buttonText}</button>
         {commentNodes}
@@ -85,7 +91,7 @@ class CommentForm extends React.Component {
     return (
       <form className="comment-form" onSubmit={this._handleSubmit.bind(this)}>
         <label>Join the Discussion</label>
-        <div classNAME="comment-form-fields">
+        <div className="comment-form-fields">
           <input placeholder="Name: " ref={(input) => this._author = input}/>
           <textarea placeholder="Comment: " ref={(textarea) => this._body = textarea }></textarea>
         </div>
