@@ -86,8 +86,8 @@ class CommentForm extends React.Component {
       <form className="comment-form" onSubmit={this._handleSubmit.bind(this)}>
         <label>Join the Discussion</label>
         <div classNAME="comment-form-fields">
-          <input placeholder="Name: "/>
-          <textarea placeholder="Comment: "></textarea>
+          <input placeholder="Name: " ref={(input) => this._author = input}/>
+          <textarea placeholder="Comment: " ref={(textarea) => this._body = textarea }></textarea>
         </div>
         <div className="comment-form-actions">
           <button type="submit">
@@ -100,6 +100,11 @@ class CommentForm extends React.Component {
 
   _handleSubmit(event) {
     event.preventDefault();
+
+    let author = this._author;
+    let body = this._body;
+
+    this.props.addComment(author.value, body.value);
   }
 
 }//end of CommentForm component
