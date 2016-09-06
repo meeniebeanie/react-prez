@@ -42,6 +42,13 @@ class CommentBox extends React.Component {
 
   render(){
     const comments = this._getComments();
+
+    let buttonText = 'Show Comments';
+
+    if(this.state.showComments) {
+      buttonText = 'Hide Comments';
+    }
+
     let commentNodes;
     if (this.state.showComments) { //add this code if the state is true
       commentNodes = <div className="comment-list">{comments}</div>
@@ -49,7 +56,7 @@ class CommentBox extends React.Component {
     return (
       <div className="comment-box">
         <h3 className="comment-count">{this._getCommentsTitle(comments.length)}</h3>
-        <button onClick={this._handleClick.bind(this)}>Show Comments</button>
+        <button onClick={this._handleClick.bind(this)}>{buttonText}</button>
         {commentNodes}
       </div>
     )
